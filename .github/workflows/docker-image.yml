@@ -15,4 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dvote-frontend:$(date +%s)
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: test-workflow
+        registry: 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
