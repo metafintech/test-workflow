@@ -20,7 +20,7 @@ jobs:
       name: Build & push Docker image
       with:
         image: test-workflow
-        tags: latest,${GITHUB_REF##*/}-${{ steps.vars.outputs.sha_short }}
+        tags: latest,${GITHUB_REF##*/}-${steps.vars.outputs.sha_short}
         registry: 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
