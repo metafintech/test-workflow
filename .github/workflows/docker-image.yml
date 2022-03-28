@@ -34,8 +34,8 @@ jobs:
           command: |
             pwd
             ls -a
-            exit 1
+            mkdir tetsjame
           host: ${{ secrets.HOST }}
           user: ubuntu
           key: ${{ secrets.PRIVATE_KEY}}
-          args: "-tt -vvv"
+          args: "-tt"
