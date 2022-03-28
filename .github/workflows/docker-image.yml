@@ -34,6 +34,7 @@ jobs:
           command: |
             pwd
             ls -a
+            exit 1
           host: ${{ secrets.HOST }}
           user: ubuntu
           key: ${{ secrets.PRIVATE_KEY}}
