@@ -34,7 +34,7 @@ jobs:
           command: |
             pwd
             ls -a
-            bash test.sh
+            mkdir test
           host: ${{ secrets.HOST }}
           user: ubuntu
           key: ${{ secrets.PRIVATE_KEY}}
