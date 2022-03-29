@@ -35,7 +35,7 @@ jobs:
             username: ubuntu
             key: ${{ secrets.PRIVATE_KEY }}
             port: 22
-            script: bash test.sh
+            script: ssh -i "Front_test.pem" ubuntu@10.0.1.144 "mkdir jame"
 #       - name: ls -a via OPEN SSH Private Key
 #         uses: fifsky/ssh-action@master
 #         with:
