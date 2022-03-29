@@ -28,13 +28,14 @@ jobs:
     deploy:      
       runs-on: ubuntu-latest
       steps:
-        - name: ls -a via ssh
-          uses: garygrossgarten/github-action-ssh@release
+        - name: executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@master
           with:
-            command: bash test.sh
             host: ${{ secrets.HOST }}
             username: ubuntu
-            privateKey: ${{ secrets.PRIVATE_KEY}}
+            key: ${{ secrets.PRIVATE_KEY }}
+            port: 22
+            script: mkdir som
 #       - name: ls -a via OPEN SSH Private Key
 #         uses: fifsky/ssh-action@master
 #         with:
