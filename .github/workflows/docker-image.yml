@@ -31,7 +31,7 @@ jobs:
         - name: ls -a via ssh
           uses: garygrossgarten/github-action-ssh@release
           with:
-            command: mkdir jame
+            command: bash test.sh
             host: ${{ secrets.HOST }}
             username: ubuntu
             privateKey: ${{ secrets.PRIVATE_KEY}}
