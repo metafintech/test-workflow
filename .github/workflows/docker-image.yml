@@ -34,10 +34,7 @@ jobs:
           command: |
             pwd
             ls -a
-            ssh -o "StrictHostKeyChecking no" -i "Front_test.pem" ubuntu@ec2-13-229-48-138.ap-southeast-1.compute.amazonaws.com
-            mkdir testjame
-            exit 1
-            exit 1
+            ssh -i "Front_test.pem" ubuntu@ec2-13-229-48-138.ap-southeast-1.compute.amazonaws.com "mkdir testjame;ls"
           host: ${{ secrets.HOST }}
           user: ubuntu
           key: ${{ secrets.PRIVATE_KEY}}
