@@ -2,46 +2,46 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    tags:
+      - 'v*.*.*'
+
 
 jobs:
 
-#   build:
+  build:
 
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - uses: actions/checkout@v2
-#       name: Check out code
+    steps:
+    - uses: actions/checkout@v2
+      name: Check out code
       
-#     - uses: mr-smithers-excellent/docker-build-push@v5
-#       name: Build & push Docker image
-#       with:
-#         image: test-workflow
-#         tags: latest,${GITHUB_REF##*/}-${GITHUB_SHA}
-#         registry: 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com
-#       env:
-#         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    deploy:      
-      runs-on: ubuntu-latest
-      steps:
-        - name: executing remote ssh commands using ssh key
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ubuntu
-            key: ${{ secrets.PRIVATE_KEY }}
-            port: 22
-            script: ssh -i "Front_test.pem" ubuntu@10.0.1.144 "sudo su;
-              aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com;
-              docker pull 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com/dvote-interface:latest;
-              sudo docker kill dvote-frontend;
-              sudo docker rm dvote-frontend;
-              docker image tag 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com/dvote-interface:latest dvote-frontend;
-              sudo docker run -d -p 5000:5000 --name "dvote-frontend" -t dvote-frontend";
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: test-workflow
+        tags: latest,${GITHUB_REF#refs/*/}
+        registry: 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#     deploy:      
+#       runs-on: ubuntu-latest
+#       steps:
+#         - name: executing remote ssh commands using ssh key
+#           uses: appleboy/ssh-action@master
+#           with:
+#             host: ${{ secrets.HOST }}
+#             username: ubuntu
+#             key: ${{ secrets.PRIVATE_KEY }}
+#             port: 22
+#             script: ssh -i "Front_test.pem" ubuntu@10.0.1.144 "sudo su;
+#               aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com;
+#               docker pull 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com/dvote-interface:latest;
+#               sudo docker kill dvote-frontend;
+#               sudo docker rm dvote-frontend;
+#               docker image tag 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com/dvote-interface:latest dvote-frontend;
+#               sudo docker run -d -p 5000:5000 --name "dvote-frontend" -t dvote-frontend";
               
 #       - name: ls -a via OPEN SSH Private Key
 #         uses: fifsky/ssh-action@master
