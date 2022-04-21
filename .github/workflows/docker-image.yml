@@ -19,7 +19,9 @@ jobs:
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:
-        buildArgs:  TEST1=hello,TEST2=haha,TEST3=ohhh
+        buildArgs:  TEST1=hello,
+          TEST2=haha,
+          TEST3=ohhh
         image: test-workflow
         tags: latest,${GITHUB_REF#refs/*/}
         registry: 793632633845.dkr.ecr.ap-southeast-1.amazonaws.com
