@@ -10,6 +10,5 @@ ENV TEST3=$TEST3
 RUN apt-get update \
     && apt-get install -y --no-install-recommends mysql-client \
     && rm -rf /var/lib/apt/lists/*
-ENTRYPOINT ["mysql"]
 
-CMD ["sleep", "1000"]
+CMD ["sleep", "infinity"]
